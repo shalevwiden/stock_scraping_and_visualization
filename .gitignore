@@ -1,5 +1,7 @@
 #ignore the pycache folder
 __pycache__/
+.vscode/
+
 # ignore the files that end with .pyc and .pyd
 *.py[cd]
 # ignore .png files

@@ -6,6 +6,7 @@ Lets make some stock visualizations with matplot lib
 from stockscraping import name_mktcap_dict
 
 from matplotlib import pyplot as plt
+import os
 
 def makesortedcountrylist():
     countries=[]
@@ -40,6 +41,8 @@ def makesortedcountrylist():
 
 sortedcountry_countrycount_list=makesortedcountrylist()
 
+print(f'sortedcountry_countrycount_list:\n{sortedcountry_countrycount_list}')
+
 def getlabelsandsizes(sortedcountry_countrycount_list,rangenum,otherinchart=True):
     '''
     returns labels and sizes lists based on a certain range. Takes in presorted data( a list of tuples)
@@ -48,6 +51,8 @@ def getlabelsandsizes(sortedcountry_countrycount_list,rangenum,otherinchart=True
     '''
     labels=[]
     sizes=[]
+    # can use hexcodes or names. alot of stuff
+    colors=[]
     for i in range(rangenum):
         label, size=sortedcountry_countrycount_list[i]
         labels.append(f'{label}: {size}')
@@ -63,7 +68,7 @@ def getlabelsandsizes(sortedcountry_countrycount_list,rangenum,otherinchart=True
         sizes.append(otherval)
 
 
-    return labels, sizes
+    return labels, sizes, colors
 
 print(f'\nThe output of the getlabelsandsizes function\n')
 print(getlabelsandsizes(sortedcountry_countrycount_list=sortedcountry_countrycount_list,rangenum=5))
@@ -93,11 +98,11 @@ def makepiechart():
     plt.axis('equal')
     plt.legend(loc='lower right',bbox_to_anchor=(1.1, -0.1))   
     # it rewrites it each time
-    plt.savefig('/Users/shalevwiden/Downloads/Coding_Files/Python/BeautifulSoup_Library/company_stock_scraping/graphs/piechart.png')
+    plt.savefig(os.path.join(os.getcwd(),'graphs/piechart.png'))
 
     plt.show()
 
-# makepiechart()
+makepiechart()
 
 def makebarchart():
     '''
