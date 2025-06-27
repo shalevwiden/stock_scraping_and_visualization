@@ -1,0 +1,11 @@
+#ignore the pycache folder
+__pycache__/
+# ignore the files that end with .pyc and .pyd
+*.py[cd]
+# ignore .png files
+*.png
+# keep 2 of em
+!graphs/
+
+!graphs/piechart538.png
+!graphs/piechartlowerlegend.png
