@@ -52,7 +52,14 @@ def getlabelsandsizes(sortedcountry_countrycount_list,rangenum,otherinchart=True
     labels=[]
     sizes=[]
     # can use hexcodes or names. alot of stuff
-    colors=[]
+    colors=[
+    "#489EC2",  # USA - Red
+    '#DE2910',  # China - Red
+    "#071945",  # UK - Blue
+    '#FFCE00',  # Germany - Gold
+    "#6A0F0F"   # Netherlands - Red
+]
+
     for i in range(rangenum):
         label, size=sortedcountry_countrycount_list[i]
         labels.append(f'{label}: {size}')
@@ -82,23 +89,30 @@ print(len(name_mktcap_dict))
 
 print(f'Availablestyles=\n{plt.style.available}')
 
+
+pathtocurrentfile = os.path.dirname(os.path.abspath(__file__))
+print(f'pathtocurrentfile:{pathtocurrentfile}')
+save_path = os.path.join(pathtocurrentfile, 'graphs/piechart.png')
 # set the size of the chart
 def makepiechart():
-
-# can I add seperate data that will be ON the piechart?
+    '''
+    Gets labels, sizes, and colors from getlabelsandsizes()
+    '''
+# can I add seperate data that will be ON the piechart? In each quadrant hmmmmmm
 
     labels=getlabelsandsizes(sortedcountry_countrycount_list=sortedcountry_countrycount_list,rangenum=5)[0]
     sizes=getlabelsandsizes(sortedcountry_countrycount_list=sortedcountry_countrycount_list,rangenum=5)[1]
+    colors=getlabelsandsizes(sortedcountry_countrycount_list=sortedcountry_countrycount_list,rangenum=5)[2]
     styles=['fivethirtyeight','ggplot']
     plt.style.use(styles[1])
 
     plt.figure(figsize=(10,6))
-    plt.pie(sizes,labels=labels, startangle=270)
+    plt.pie(sizes,labels=labels, colors=colors,startangle=270)
     plt.title("Country Distribution in top 100 Companies")
     plt.axis('equal')
     plt.legend(loc='lower right',bbox_to_anchor=(1.1, -0.1))   
     # it rewrites it each time
-    plt.savefig(os.path.join(os.getcwd(),'graphs/piechart.png'))
+    plt.savefig(save_path)
 
     plt.show()
 
